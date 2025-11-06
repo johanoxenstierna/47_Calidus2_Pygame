@@ -286,30 +286,24 @@ class GenObjects:
         # roc_gi['t'] = 20  # time of first launch (in game hours)
         # roc_gi['hPerR'] = 10
 
-        ''' NEED TO DECIDE ANIMATION FRAMES TO GET t -> init_frame
-        1h   = 10 years   = 3650 frames
-        10h  = 100 years  = 36500 frames
-        100h = 1000 years = 365000 frames
-        600h = 6000 years = 2190000 frames
-         
-        # 20h = 200 years and
-        # if earth 1 year=365 frames -> 36500 frames = 100 years -> 73000 = 200 years
-        # 600h = 6000 years  -> 
-        # 365000days = 1000 years -> 6000 years = 2 190 000 days and then /=1000 gives 2190 total frames for full animation.
+        ''' 
+        
+        Discussion on frame translations: see R_gi.py
+        
         '''
 
         # init_frame0 = roc_gi['t'] * 10 * standard_earth_period_frames  # * 10 bcs 1h=10years
-        init_frame0 = int(roc_gi['init_frame'] / 1)  # without this there would be a bunch of rotations before init_frame
+        # init_frame0 = int(roc_gi['init_frame'] / 1)  # without this there would be a bunch of rotations before init_frame
         # fdist_avg = roc_gi['hPerR'] * 10 * standard_earth_period_frames  # framesDist. 1 hour in game = 10 earth years
-        fdist_avg = int(roc_gi['fdist'] / 1)
+        # fdist_avg = int(roc_gi['fdist'] / 1)
         CANDS_FACTOR_DIVISOR = 4  #so 4x more candidates than used
         if roc_gi['destination_type'] == 'orbit':
             CANDS_FACTOR_DIVISOR = 1
 
-        base_step = max(20, fdist_avg // CANDS_FACTOR_DIVISOR)  # MAX 1 launch every 0.3 s
+        base_step = max(20, roc_gi['fdist'] // CANDS_FACTOR_DIVISOR)  # MAX 1 launch every 0.3 s
 
         # init_frame_cands0 = list(range(init_frame0, P.FRAMES_STOP, fdist_avg // CANDS_FACTOR))  # so 4x more candidates than used
-        init_frame_cands0 = jittered_range(init_frame0, P.FRAMES_STOP, base_step=base_step, rand_step=base_step // 3)
+        init_frame_cands0 = jittered_range(roc_gi['init_frame'], P.FRAMES_STOP, base_step=base_step, rand_step=base_step // 3)
 
         if roc_gi['destination_type'] == 'orbit':
             return init_frame_cands0

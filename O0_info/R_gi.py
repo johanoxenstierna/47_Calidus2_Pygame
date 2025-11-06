@@ -216,6 +216,19 @@ def translate(_R_gi):
         'Astro0': 'Astro0b',
         'Molli': '4_NEA'
     }
+
+    '''
+    NEED TO DECIDE ANIMATION FRAMES TO GET t -> init_frame
+    1h   = 10 years   = 3650 frames
+    10h  = 100 years  = 36500 frames
+    100h = 1000 years = 365000 frames
+    600h = 6000 years = 2190000 frames
+     
+    # 20h = 200 years and
+    # if earth 1 year=365 frames -> 36500 frames = 100 years -> 73000 = 200 years
+    # 600h = 6000 years  -> 
+    # 365000days = 1000 years -> 6000 years = 2 190 000 days and then /=1000 gives 2190 total frames for full animation.
+    '''
     # BB = key.keys()
     # aasdf = sorted(_R_gi, key=lambda x:x['t'])
     standard_earth_period_frames = int(365 / P.SPEED_MULTIPLIER)
@@ -227,12 +240,12 @@ def translate(_R_gi):
             # _od = key[_od]  # does not work
 
         '''1 hour in game = 10 years IRL. 1 year = 365 frames, so 3650 frames'''
-        gi['init_frame'] = gi['t'] * 10 * standard_earth_period_frames / 1 # * 10 bcs 1h=10years
-        gi['fdist'] = gi['hPerR'] * 10 * standard_earth_period_frames / 1000  # OBS MORE DIV MAKES MORE OF THEM
+        gi['init_frame'] = int(gi['t'] * 10 * standard_earth_period_frames / 1) # * 10 bcs 1h=10years  (t is in hours)
+        gi['fdist'] = int(gi['hPerR'] * 10 * standard_earth_period_frames / 1)  # OBS MORE DIV MAKES MORE OF THEM
 
-    for gi in _R_gi:  # after debug
-        del gi['t']
-        del gi['hPerR']
+    # for gi in _R_gi:  # after debug
+    #     del gi['t']
+    #     del gi['hPerR']
 
     _R_gi1 = []
     for roc_gi in _R_gi:

@@ -1,6 +1,7 @@
 
 import numpy as np
 from copy import deepcopy
+import json
 
 import P
 
@@ -14,6 +15,7 @@ def _genesis():
     '''
 
     USE_T = 1
+    USE_SAVED_R = 0
 
     # UNTOUCHED REAL VALUES solar_system_info = {
     #     '2_Mercury': {'AU': 0.387, 'period_days': 88},
@@ -41,7 +43,7 @@ def _genesis():
     #     '6_Io': {'AU': 0.30282, 'period_days': 120},  # around Jupiter
     # }
 
-    # Settings override =========
+    # Settings override (overrides solar_system_info) =========
     T = {
         '2_Mercury':  {'r':  50, 'phi': 0 * 2 * np.pi, 'period_days':  150, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.05},
         '3_Venus':    {'r': 100, 'phi': 0 * 2 * np.pi, 'period_days':  200, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.15},
@@ -126,8 +128,14 @@ def _genesis():
             gis['Neptune'] = i_neptune_gi.neptune_gi_()
 
     if 'Rockets' in P.OBJ_TO_SHOW:
-        gis['Rockets'] = R_gi.R_gi_()
-        R_gi.translate(gis['Rockets'])
+        if USE_SAVED_R == 0:
+            gis['Rockets'] = R_gi.R_gi_()
+            gis['Rockets'] = R_gi.translate(gis['Rockets'])
+            with open('./O0_info/R_gi_save.json', 'w') as f:
+                json.dump(gis['Rockets'], f, indent=4)
+        else:
+            with open('./O0_info/R_gi_save.json', 'r') as f:
+                gis['Rockets'] = json.load(f)
 
     for gi_id, gi in gis.items():
         if type(gi) is dict:  # non rocket

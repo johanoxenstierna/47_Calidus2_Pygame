@@ -1,0 +1,314 @@
+[
+    {
+        "t": 20,
+        "od": [
+            "4_Earth",
+            "4_GSS"
+        ],
+        "type": "first",
+        "hPerR": 10,
+        "c": "Sputnik - ISS (67)",
+        "init_frame": 73000,
+        "fdist": 36500
+    },
+    {
+        "t": 68,
+        "od": [
+            "4_Earth",
+            "4_GSS"
+        ],
+        "type": "mtrl",
+        "hPerR": 1,
+        "c": "GSS factory: Most of these rockets carry construction materials and water (108).",
+        "init_frame": 248200,
+        "fdist": 3650
+    },
+    {
+        "t": 69,
+        "od": [
+            "4_Earth",
+            "4_Moon"
+        ],
+        "type": "first",
+        "hPerR": 20,
+        "c": "Moon factory. Same expansion programme (109)",
+        "init_frame": 251850,
+        "fdist": 73000
+    },
+    {
+        "t": 140,
+        "od": [
+            "4_Moon",
+            "4_GSS"
+        ],
+        "type": "mtrl",
+        "hPerR": 5,
+        "c": "Material from Moon to GSS",
+        "init_frame": 511000,
+        "fdist": 18250
+    },
+    {
+        "t": 170,
+        "od": [
+            "4_Earth",
+            "5_Mars"
+        ],
+        "type": "first",
+        "hPerR": 30,
+        "c": "Mars factory",
+        "init_frame": 620500,
+        "fdist": 109500
+    },
+    {
+        "t": 175,
+        "od": [
+            "5_Mars",
+            "4_GSS"
+        ],
+        "type": "mtrl",
+        "hPerR": 4,
+        "c": "Material from Mars to GSS. Doubles through time",
+        "init_frame": 638750,
+        "fdist": 14600
+    },
+    {
+        "t": 190,
+        "od": [
+            "4_GSS",
+            "4_Earth"
+        ],
+        "type": "mtrl",
+        "hPerR": 2,
+        "c": "Material from GSS to Earth (mostly scrap)",
+        "init_frame": 693500,
+        "fdist": 7300
+    },
+    {
+        "t": 250,
+        "od": [
+            "4_Earth",
+            "3_Venus"
+        ],
+        "type": "first",
+        "hPerR": 40,
+        "c": "Venus factory",
+        "init_frame": 912500,
+        "fdist": 146000
+    },
+    {
+        "t": 255,
+        "od": [
+            "3_Venus",
+            "4_GSS"
+        ],
+        "type": "mtrl",
+        "hPerR": 5,
+        "c": "Material from Venus to GSS",
+        "init_frame": 930750,
+        "fdist": 18250
+    },
+    {
+        "t": 270,
+        "od": [
+            "4_Earth",
+            "6_Io"
+        ],
+        "type": "first",
+        "hPerR": 15,
+        "c": "Io factory",
+        "init_frame": 985500,
+        "fdist": 54750
+    },
+    {
+        "t": 275,
+        "od": [
+            "6_Io",
+            "4_GSS"
+        ],
+        "type": "mtrl",
+        "hPerR": 20,
+        "c": "Material from Io to GSS",
+        "init_frame": 1003750,
+        "fdist": 73000
+    },
+    {
+        "t": 316,
+        "od": [
+            "4_Earth",
+            "4_GSS"
+        ],
+        "type": "mtrl",
+        "hPerR": 0.5,
+        "c": "Expanded deliveries to GSS",
+        "init_frame": 1153400,
+        "fdist": 1825
+    },
+    {
+        "t": 317,
+        "od": [
+            "4_GSS",
+            "4_Moon"
+        ],
+        "type": "water",
+        "hPerR": 5,
+        "c": "Mostly water for expanded production",
+        "init_frame": 1157050,
+        "fdist": 18250
+    },
+    {
+        "t": 318,
+        "od": [
+            "4_GSS",
+            "5_Mars"
+        ],
+        "type": "water",
+        "hPerR": 20,
+        "c": "Mostly water for expanded production",
+        "init_frame": 1160700,
+        "fdist": 73000
+    },
+    {
+        "t": 330,
+        "od": [
+            "4_Earth",
+            "6_Ganymede"
+        ],
+        "type": "first",
+        "hPerR": 40,
+        "c": "Ganymede factory",
+        "init_frame": 1204500,
+        "fdist": 146000
+    },
+    {
+        "t": 335,
+        "od": [
+            "6_Ganymede",
+            "4_GSS"
+        ],
+        "type": "mtrl",
+        "hPerR": 20,
+        "c": "Material from Ganymede to GSS.",
+        "init_frame": 1222750,
+        "fdist": 73000
+    },
+    {
+        "t": 350,
+        "od": [
+            "4_Earth",
+            "Astro0b"
+        ],
+        "type": "first",
+        "hPerR": 30,
+        "c": "Asteroid Belt factory",
+        "init_frame": 1277500,
+        "fdist": 109500
+    },
+    {
+        "t": 355,
+        "od": [
+            "Astro0b",
+            "4_GSS"
+        ],
+        "type": "mtrl",
+        "hPerR": 30,
+        "c": "Material from Asteroid Belt to GSS",
+        "init_frame": 1295750,
+        "fdist": 109500
+    },
+    {
+        "t": 384,
+        "od": [
+            "4_Earth",
+            "4_NEA"
+        ],
+        "type": "first",
+        "hPerR": 20,
+        "c": "Near Earth Asteroid factory",
+        "init_frame": 1401600,
+        "fdist": 73000
+    },
+    {
+        "t": 390,
+        "od": [
+            "4_NEA",
+            "4_GSS"
+        ],
+        "type": "mtrl",
+        "hPerR": 2,
+        "c": "Mostly rare petrochemical products",
+        "init_frame": 1423500,
+        "fdist": 7300
+    },
+    {
+        "t": 391,
+        "od": [
+            "4_NEA",
+            "4_GSS"
+        ],
+        "type": "water",
+        "hPerR": 2,
+        "c": "Earth-based water at GSS is finally replaced by water from Moon and NEAs.",
+        "init_frame": 1427150,
+        "fdist": 7300
+    },
+    {
+        "t": 392,
+        "od": [
+            "4_NEA",
+            "4_Earth"
+        ],
+        "type": "mtrl",
+        "hPerR": 2,
+        "c": "Rare but highly demanded materials from NEAs",
+        "init_frame": 1430800,
+        "fdist": 7300
+    },
+    {
+        "t": 450,
+        "od": [
+            "4_GSS",
+            "Astro0b"
+        ],
+        "type": "mtrl",
+        "hPerR": 20,
+        "c": "Advanced building materials to Asteroid Belt",
+        "init_frame": 1642500,
+        "fdist": 73000
+    },
+    {
+        "t": 480,
+        "od": [
+            "4_NEA",
+            "Astro0b"
+        ],
+        "type": "mtrl",
+        "hPerR": 20,
+        "c": "Mostly rare petrochemical products",
+        "init_frame": 1752000,
+        "fdist": 73000
+    },
+    {
+        "t": 510,
+        "od": [
+            "5_Mars",
+            "Astro0b"
+        ],
+        "type": "mtrl",
+        "hPerR": 20,
+        "c": "Water compression chemicals.",
+        "init_frame": 1861500,
+        "fdist": 73000
+    },
+    {
+        "t": 530,
+        "od": [
+            "Astro0b",
+            "5_Mars"
+        ],
+        "type": "water",
+        "hPerR": 15,
+        "c": "Water from Asteroid Belt to Mars.",
+        "init_frame": 1934500,
+        "fdist": 54750
+    }
+]
