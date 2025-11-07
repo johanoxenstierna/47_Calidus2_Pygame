@@ -5,17 +5,22 @@
 
 import numpy as np
 import random
+
+import P
+
 random.seed(3)  # ONLY HERE
 np.random.seed(3)  # ONLY HERE
 import time
 
 from src.gen_objects import GenObjects
-from src.genesis_infos import _genesis
+from src.genesis_infos import _genesis, gen_incl_frames
 from src.draw_helpers_pygame import *
 from src.write_to_file import VideoWriter
 
 g = GenObjects()
 g.gis = _genesis()
+if P.SKIP_FRAMES:
+    incl_frames = gen_incl_frames(g.gis['Rockets'])
 
 o0 = g.gen_base_object()
 g.gen_planets_moons(o0)
@@ -54,13 +59,35 @@ clock = pygame.time.Clock()
 time0 = time.perf_counter()
 i = 0
 i_step = 1
-TEMP_SKIP = 0
+# TEMP_SKIP = 0
+# aspeeds = np.zeros((P.FRAMES_STOP,), dtype=np.float32)
+#
+# incl_frames = []
+# t = 0.0
+# while t < P.FRAMES_STOP:
+#     incl_frames.append(int(round(t)))
+#     # speed(t) can be any function or precomputed array
+#     # example: 1x → 2x → 4x
+#     if t < 100:
+#         speed = 1.3
+#     elif t < 200:
+#         speed = 1.2
+#     else:
+#         speed = 1
+#     t += speed
+#
+# incl_frames = np.asarray(incl_frames, dtype=np.uint32)
+# incl_frames = np.append(incl_frames, np.uint32(P.FRAMES_STOP + 1))  # instead of assertion
+incl_idx = 0
+
 running = True
 while running:  # good so time can be
 # for i in range(0, P.FRAMES_STOP):
 
     if i % 100 == 0:
         print(i)
+
+    # i_step = i_steps[i]
 
     # If ESC pressed then quit =============
     for event in pygame.event.get():
@@ -69,6 +96,7 @@ while running:  # good so time can be
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
+    # =======================================
 
     # =======================================
     D_scene = []  # Drawables (objects shown in the animation): Rebuilt each iteration!
@@ -91,9 +119,19 @@ while running:  # good so time can be
             elif i == rocket.frame_ss[1]:
                 pass
 
-    if 0 < i < TEMP_SKIP: # FRAMES range should only be done here
+    # if 0 < i < TEMP_SKIP: # FRAMES range should only be done here
+    # if i not in incl_frames:
+    #     i += 1
+    #     continue
+
+    if i < incl_frames[incl_idx]:
         i += 1
-        continue
+        continue  # not yet reached next included frame
+    elif i == incl_frames[incl_idx]:
+        incl_idx += 1  # move to next target
+        # draw this frame
+
+    # i += i_fac[i] # OLDer
 
     # BLITTING CODE ==================================
     # world_surf.blit(backgr_scene, (0, 0))  #

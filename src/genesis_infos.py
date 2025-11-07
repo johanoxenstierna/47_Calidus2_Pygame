@@ -15,7 +15,7 @@ def _genesis():
     '''
 
     USE_T = 1
-    USE_SAVED_R = 0
+    USE_SAVED_R = 1
 
     # UNTOUCHED REAL VALUES solar_system_info = {
     #     '2_Mercury': {'AU': 0.387, 'period_days': 88},
@@ -134,7 +134,7 @@ def _genesis():
             with open('./O0_info/R_gi_save.json', 'w') as f:
                 json.dump(gis['Rockets'], f, indent=4)
         else:
-            with open('./O0_info/R_gi_save.json', 'r') as f:
+            with open('./O0_info/R_gi_save_temp.json', 'r') as f:
                 gis['Rockets'] = json.load(f)
 
     for gi_id, gi in gis.items():
@@ -181,3 +181,47 @@ def convert_to_project(T, solar_system_info, r_jupiter=800):
         params['period_days'] = info['period_days']
 
     return T2
+
+
+def gen_incl_frames(R_gi: list) -> np.ndarray:
+
+    """Generate animation-speed array from rocket schedule."""
+
+    max_speed = 300.0
+
+    aspeed = np.full(P.FRAMES_STOP, fill_value=max_speed, dtype=np.float32)
+
+    # constants (can be tuned)
+    ramp_len = 10000
+    stay_len = 300
+
+    # sort events by init_frame
+    init_frames = sorted([d["init_frame"] for d in R_gi])
+
+    ramp_up = np.linspace(1, max_speed, ramp_len)
+    ramp_do = np.linspace(max_speed, 1, ramp_len)
+
+    sink = np.ones((ramp_len * 2 + stay_len,), dtype=np.float32)
+    sink[0:ramp_len] = ramp_do
+    sink[ramp_len + stay_len:] = ramp_up
+
+    aspeed[0:100] = np.ones((100,))
+    aspeed[100:100 + ramp_len] = ramp_up
+
+    for i in init_frames:
+        i_start = i - ramp_len
+        i_end = i + stay_len + ramp_len
+        aspeed[i_start:i_end] = sink
+
+    incl = []
+    t = 0.0
+    while t < P.FRAMES_STOP:
+        incl.append(int(t))
+        _aspeed = aspeed[int(t)]
+        t += _aspeed  # advance by current speed
+
+    incl = np.array(incl, dtype=np.uint32)
+    # optional sentinel
+    incl = np.append(incl, np.uint32(P.FRAMES_STOP + 1))  # instead of assertion
+
+    return incl

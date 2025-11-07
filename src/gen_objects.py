@@ -306,6 +306,7 @@ class GenObjects:
         init_frame_cands0 = jittered_range(roc_gi['init_frame'], P.FRAMES_STOP, base_step=base_step, rand_step=base_step // 3)
 
         if roc_gi['destination_type'] == 'orbit':
+            init_frames.append(P.FRAMES_STOP)
             return init_frame_cands0
 
         init_frame_cands1 = np.zeros((len(init_frame_cands0), 2), dtype=int)  # 0: init_frame 1: len of rocket
