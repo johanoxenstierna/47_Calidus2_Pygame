@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent
 MAP_DIMS = (1920, 1080)
 
 # FRAMES_START = 0
-FRAMES_STOP = 300000  #30000  OBS: Will be bugs if lower than, say,
+FRAMES_STOP = 2000000  #30000  OBS: Will be bugs if lower than, say,
 # FRAMES_TOT_BODIES = FRAMES_STOP - 25
 # FRAMES_TOT = FRAMES_STOP - FRAMES_START
 
@@ -28,10 +28,10 @@ OBJ_TO_SHOW.append('2_Mercury')
 OBJ_TO_SHOW.append('4_Earth')
 OBJ_TO_SHOW.append('4_GSS')
 OBJ_TO_SHOW.append('4_Moon')
-OBJ_TO_SHOW.append('4_NEA')
+# OBJ_TO_SHOW.append('4_NEA')
 OBJ_TO_SHOW.append('5_Mars')
 # OBJ_TO_SHOW.append('Astro0')
-OBJ_TO_SHOW.append('Astro0b')
+# OBJ_TO_SHOW.append('Astro0b')
 OBJ_TO_SHOW.append('6_Jupiter')
 OBJ_TO_SHOW.append('6_Io')
 OBJ_TO_SHOW.append('6_Ganymede')

@@ -9,7 +9,9 @@ def R_gi_():
     if P.ONE_ROCKET == 1:
         R = [
             {'t': 20,
-             'od': ['6_Io', '4_GSS'],
+             # 'od': ['6_Io', '4_GSS'],
+             'od': ['4_Earth', '6_Io'],
+             # 'od': ['4_Earth', '4_GSS'],
              'type': 'first',
              'hPerR': 1,
              'c': 'Sputnik - ISS (67)'

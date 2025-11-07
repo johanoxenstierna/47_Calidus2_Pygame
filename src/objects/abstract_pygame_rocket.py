@@ -11,9 +11,9 @@ class AbstractPygameRocket:
     def update_draw(_s, D_scene):
 
         x, y = _s.xy[_s.age] * P.SS_RENDER
-        z = 3000 #_s.zorders[_s.age]
-        # alpha = _s.alphas[_s.age]
-        alpha = 255
+        z = _s.zorders[_s.age]
+        alpha = _s.alphas[_s.age]
+        # alpha = 255
 
         # Convert color from float to 0–255
         # color = tuple(int(c * 255) for c in _s.color[_s.age])

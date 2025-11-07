@@ -28,10 +28,10 @@ class Rocket3(AbstractPygameRocket):
         if self.p0.parent is self.p1:  # Currently this doesnt handle the inter + moon case (because it's custom-built)
             self.C = self.p1
 
-        self.xy0 = np.zeros((0, 2), dtype=np.float32)  # output
+        # self.xy0 = np.zeros((0, 2), dtype=np.float32)  # output
         # self.xy2 = np.zeros((0, 2), dtype=np.float32)  # output
         self.alphas = None
-        self.zorders = None
+        self.zorders = np.zeros((0, 2), dtype=np.uint32)
 
     def gen_rocket_motion(self):
         """
@@ -48,8 +48,8 @@ class Rocket3(AbstractPygameRocket):
         of hitting orbit altitudes, and in this function we rotate it etc. to get exact p0->p1 matching.
 
         """
-        takeoff_frames = 120  # WE NEED HARDCODED FOR COASTING/TRANSFER ROTATION, BUT RAND COULD BE ADDED HERE
-        landing_frames = 120  #
+        takeoff_frames = int(120 / P.SPEED_MULTIPLIER)  # WE NEED HARDCODED FOR COASTING/TRANSFER ROTATION, BUT RAND COULD BE ADDED HERE
+        landing_frames = int(120 / P.SPEED_MULTIPLIER)  #
 
         # XY_TARGET -> PHI FOR ROTATION ===============================
         if self.destination_type == 'inter':
@@ -84,7 +84,7 @@ class Rocket3(AbstractPygameRocket):
 
         # xy0_spiral0 = None
         xy0_coast = None
-        xy0_spiral1 = None
+        # xy0_spiral1 = None
 
         # COASTING AND ROTATION ================================
         if self.destination_type == 'inter':
@@ -121,42 +121,27 @@ class Rocket3(AbstractPygameRocket):
         # ================================
 
         # # LANDING =======================
-
         if self.destination_type == 'inter' and self.p1.parent.id != '0':
-            xy2_rotated = xy2_rotated[:-60, :]
+            xy2_rotated_cutoff = int(len(xy2_rotated) * 0.8)
+            xy2_rotated = xy2_rotated[:xy2_rotated_cutoff, :]
             # v0 = slope_at_idx(xy2_rotated, len(xy2_rotated) - 1, side='before')
             i_range_landing = range(self.init_frame + len(xy2_rotated),
                                     self.init_frame + len(xy2_rotated) + landing_frames)
             p1xy2 = np.copy(self.p1.xy2[self.p1.get_i_orbit(i_range_landing)])  # [0, 0] is Jupiter
             p1tpxy2 = np.copy(self.p1.parent.xy2[self.p1.parent.get_i_orbit(i_range_landing)])  # [0, 0] is Sun
             p1xy2 += p1tpxy2  # [0, 0] is Sun
-            # p1tpxy2 += p1xy2
             B2 = 120
             blend2 = crossfade_B_frames(xy2_rotated, p1xy2, B2)
             xy2_rotated = np.vstack((xy2_rotated[:len(xy2_rotated) - B2 // 2], blend2, p1xy2[B2 // 2:]))
-            # xy2_rotated = np.vstack((xy2_rotated, p1xy2))
 
-            asdf = 5
-
-        # p1_landing = self.p1.xy2[self.p1.get_i_orbit(i_range_landing), :]  # ALWAYS AT P1
-        #
-        # xy0_spiral1 = spiral(landing_frames, r=50, direction='cw', tf_or_ld='landing')
-        # if self.destination_type == 'orbit' and self.p1.parent.id == '0':
-        #     pass
-        # elif self.destination_type == 'orbit' and self.p1.parent.id != '0':
-        #     xy0_spiral1 += p1_landing
-        # elif self.destination_type == 'inter' and self.p1.parent.id == '0':
-        #     xy0_spiral1 += p1_landing
-        # elif self.destination_type == 'inter' and self.p1.parent.id != '0':
-        #     xy0_spiral1 += self.p1.parent.xy2[self.p1.parent.get_i_orbit(i_range_landing), :]  # centers on parent
-        #     xy0_spiral1 += p1_landing  # centers on p1
-        #
-        # xy2_rotated = np.vstack((xy2_rotated, xy0_spiral1))  # DEBUG
         ## ================================
 
         self.xy2 = xy2_rotated
-        self.alphas = self.gen_alpha(xy2_takeoff, xy0_coast, xy2_rotated, xy0_spiral1)
         self.frame_ss = [self.init_frame, self.init_frame + len(self.xy2)]
+
+        self.zorders = self.gen_zorders()
+        self.alphas = self.gen_alpha(xy2_takeoff, xy0_coast, xy2_rotated)
+
         if self.destination_type == 'orbit':  # everything assumes [0, 0] center, and here [0, 0] is a planet (also for moon -> parent)
             i_range = range(self.frame_ss[0], self.frame_ss[0] + len(self.xy2))
             C_helio = helio_xy2_over(self.C, i_range)  # THIS INCLUDES SHIFTING WITH PARENT
@@ -253,23 +238,50 @@ class Rocket3(AbstractPygameRocket):
         phi_burn = (phi0 + w_p * num_frames) % (2 * np.pi)  # phi angle at NEXT frame (start of ellipse)
         return xy0_coast, phi_burn
 
-    def gen_alpha(self, xy0_spiral0, xy0_coast, xy0_rotated, xy0_spiral1):
+    def gen_zorders(self):
+
+        zorders = np.full((len(self.xy2),), dtype=int, fill_value=10)
+        vxy_t = np.gradient(self.xy2, axis=0)
+        inds_neg = np.where(vxy_t[:, 0] >= 0)[0]  # SO, right motion is behind and left in front (clockwise)
+        zorders[inds_neg] *= -10
+        i_orbit_move_p0 = self.p0.get_i_orbit(range(self.frame_ss[0], self.frame_ss[1]))
+        i_orbit_move_p0par = self.p0.parent.get_i_orbit(range(self.frame_ss[0], self.frame_ss[1]))
+
+        if self.p0.parent.id == '0':
+            zp0andpar = self.p0.zorders[i_orbit_move_p0] + 2000
+        else:
+            zp0andpar = self.p0.parent.zorders[i_orbit_move_p0par] + 2000
+
+        zorders += zp0andpar
+        return zorders
+
+    def gen_alpha(self, xy2_takeoff, xy0_coast, xy_full):
         """
         OBS: Only works with the lengths of these arrays.
         """
 
-        TEMP = 1
+        TEMP = 0
 
-        len_xy0_spiral0 = 0 if xy0_spiral0 is None else len(xy0_spiral0)
+        # len_xy0_spiral0 = 0 if xy2_takeoff is None else len(xy2_takeoff)
+        len_xy2_takeoff = len(xy2_takeoff)
         len_xy0_coast = 0 if xy0_coast is None else len(xy0_coast)
-        len_xy0_rotated = len(xy0_rotated)
-        len_xy0_spiral1 = 0 if xy0_spiral1 is None else len(xy0_spiral1)
+        len_xy_full = len(xy_full)
+        # len_xy0_spiral1 = 0 if xy0_spiral1 is None else len(xy0_spiral1)
 
-        alphas = np.full((len(xy0_rotated),), fill_value=125, dtype=np.uint8)
+        alphas = np.full((len(xy_full),), fill_value=125, dtype=np.uint8)
 
+        num_twinkle = np.random.randint(low=1, high=8)
         if self.destination_type == 'orbit':  # No coast
             # alphas[len(xy0_rotated) - len(xy0_spiral1):] = 255
-            return alphas
+            # return alphas
+            num_twinkle = np.random.randint(low=1, high=3)
+
+        inds = np.random.randint(low=10, high=len(xy_full) - 100, size=num_twinkle)
+        for ind in inds:
+            num_frames = np.random.randint(low=20, high=50)
+            pdf = -beta.pdf(x=np.arange(0, num_frames), a=2, b=2, loc=0, scale=num_frames)
+            pdf = min_max_normalize_array(pdf, y_range=[0, 125])
+            alphas[ind:ind + num_frames] = pdf
 
         # alphas1 = np.full((len1,), fill_value=125, dtype=np.uint8)
         # if len(alphas2) > 30:
@@ -279,8 +291,8 @@ class Rocket3(AbstractPygameRocket):
         #     pdf = min_max_normalize_array(pdf, y_range=[125, 255]).astype(np.uint8)
         #     alphas2[:] = pdf
 
-        if TEMP:
-            alphas[0:len_xy0_spiral0] = 255  # takeoff
+        # if TEMP:
+        #     alphas[0:len_xy0_spiral0] = 255  # takeoff
             # alphas[len(xy0_spiral0):len(xy0_spiral0) + len(xy0_coast)] = 255  # coast
             # alphas[len_xy0_spiral0 + len_xy0_coast:len_xy0_rotated - len_xy0_spiral1] = 255  # transfer
             # alphas[len(xy0_rotated) - len(xy0_spiral1):] = 255  # landing

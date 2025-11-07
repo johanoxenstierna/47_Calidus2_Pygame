@@ -15,7 +15,7 @@ def _genesis():
     '''
 
     USE_T = 1
-    USE_SAVED_R = 1
+    USE_SAVED_R = 0
 
     # UNTOUCHED REAL VALUES solar_system_info = {
     #     '2_Mercury': {'AU': 0.387, 'period_days': 88},
@@ -154,8 +154,9 @@ def _genesis():
 
 
 def w_from_period_frames(period_frames, cw=True):
+    """Radians per frame"""
     s = -1.0 if cw else 1.0
-    return s * (2.0*np.pi / period_frames)  # rad/frame
+    return s * (2.0 * np.pi / period_frames)  # rad/frame
 
 
 def convert_to_project(T, solar_system_info, r_jupiter=800):
@@ -186,8 +187,10 @@ def convert_to_project(T, solar_system_info, r_jupiter=800):
 def gen_incl_frames(R_gi: list) -> np.ndarray:
 
     """Generate animation-speed array from rocket schedule."""
+    if P.SKIP_FRAMES == 0:
+        return np.arange(0, P.FRAMES_STOP, dtype=np.uint32)
 
-    max_speed = 300.0
+    max_speed = 1000.0
 
     aspeed = np.full(P.FRAMES_STOP, fill_value=max_speed, dtype=np.float32)
 
@@ -205,8 +208,9 @@ def gen_incl_frames(R_gi: list) -> np.ndarray:
     sink[0:ramp_len] = ramp_do
     sink[ramp_len + stay_len:] = ramp_up
 
-    aspeed[0:100] = np.ones((100,))
-    aspeed[100:100 + ramp_len] = ramp_up
+    # OBS earth will use 730 frames for 1 rotation if SPEED_MULTIPLIER = 0.5
+    aspeed[0:730] = np.ones((730,))  # example: 1 full rotation at speed 1
+    aspeed[730:730 + ramp_len] = ramp_up
 
     for i in init_frames:
         i_start = i - ramp_len

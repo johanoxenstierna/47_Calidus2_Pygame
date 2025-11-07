@@ -151,8 +151,8 @@ class O1C(AbstractPygameObject):
         # _s.radiuss *= _s.scale
 
         tot_dist = _s.gi['speed_gi'] * P.FRAMES_STOP
-        num_alpha = tot_dist / 2000
-        num_rot = tot_dist / 4000
+        num_alpha = tot_dist / 2000 * P.SPEED_MULTIPLIER
+        num_rot = tot_dist / 4000 * P.SPEED_MULTIPLIER
 
         _s.alphas = 0.5 * (np.sin(np.linspace(pi_offset_distr, pi_offset_distr + num_alpha * 2 * np.pi, P.FRAMES_STOP)) + 1).astype(np.float32)
         _s.alphas = min_max_normalize_array(_s.alphas, y_range=[_s.gi['min_alpha'], _s.gi['max_alpha']])
@@ -182,7 +182,7 @@ class O1C(AbstractPygameObject):
         _s.scale = _s.gi['scale']
 
         tot_dist = _s.gi['speed_gi'] * P.FRAMES_STOP
-        num_rot = tot_dist / 4000
+        num_rot = tot_dist / 4000 * P.SPEED_MULTIPLIER
 
         # _s.alphas = np.full((P.FRAMES_STOP,), fill_value=0.99)
         # _s.alpha = 255

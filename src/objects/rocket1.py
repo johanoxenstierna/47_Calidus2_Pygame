@@ -17,7 +17,7 @@ class Rocket1(AbstractPygameRocket):
     def __init__(_s, gi, p0, p1):
         AbstractPygameRocket.__init__(_s)
 
-        _s.DISPLAY = 1
+        _s.DISPLAY = 0
 
         _s.init_frame = 0
         _s.id = 'Not done yet (maybe not needed)'
@@ -84,7 +84,7 @@ class Rocket1(AbstractPygameRocket):
             return xy0
 
         else:
-            # ----- inter (heliocentric) -----
+            # ----- inter (heliocentric) ----- ALWAYS TOP PARENT TRANSFERS
 
             r0 = _s.p0.gi['r']
             r1 = _s.p1.gi['r']
@@ -94,6 +94,12 @@ class Rocket1(AbstractPygameRocket):
 
             if _s.p1.parent.id != '0':
                 r1 = _s.p1.parent.gi['r']
+
+            # Below is needed to give takeoff effect
+            if r0 < r1:  # outward
+                r0 = int(r0 + 30)
+            else:  # inward
+                r0 = int(r0 - 15)
 
             a = 0.5 * (r0 + r1)
             c = (r1 - r0) / 2.0
