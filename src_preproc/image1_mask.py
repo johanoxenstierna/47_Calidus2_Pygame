@@ -12,7 +12,7 @@ import P
 
 # ==== helpers ================================================================
 
-def make_relative_grid(diameter: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+def make_relative_grid(diameter: int):
     """
     Returns coordinate grids centered at the image center and radial distances.
     """

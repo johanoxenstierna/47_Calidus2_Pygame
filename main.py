@@ -132,7 +132,10 @@ while running:  # good so time can be
     final = get_final_frame(world_surf)
     screen.blit(backgr_screen, (0, 0))
     screen.blit(final, (0, 0))
-    draw_HUD_debug(i, screen)  # overlay stays crisp & always visible
+
+    if P.WRITE == 0:
+        draw_HUD_debug(i, screen)  # overlay stays crisp & always visible
+
     draw_HUD(i, screen)
 
     pygame.display.flip()  # single flip per frame  # <--

@@ -213,22 +213,9 @@ class GenObjects:
         """
 
         R = []
-        #
-        # roc_gi = {
-        #     # 'od': ['4_Earth', '4_Moon'],
-        #     # 'od': ['4_Moon', '4_Earth'],
-        #     # 'od': ['4_Earth', '6_Jupiter'],
-        #     # 'od': ['6_Jupiter', '4_Earth'],
-        #     # 'od': ['6_Jupiter', '4_Moon'],
-        #     # 'od': ['4_Moon', '6_Jupiter'],
-        #     # 'od': ['4_Moon', '6_Io'],
-        #     'od': ['6_Io', '4_Moon']
-        # }
 
+        print("Generating rocket solutions")
         for roc_gi in self.gis['Rockets']:
-
-            # roc_gi = self.gis['Rockets']
-            # roc_gi['od'] = ['4_Earth', '4_Moon']
 
             p0 = o0.O1[roc_gi['od'][0]]
             p1 = o0.O1[roc_gi['od'][1]]
@@ -260,9 +247,12 @@ class GenObjects:
                 # R.append(rocket1)  # P0 SHOULD NOT MOVE, BECAUSE IT IS SHIFTED BY IT
                 # R.append(rocket2)  # JUST ADDS TIME
                 R.append(rocket3)
+            print("generated a rocket od")
+
         R = sorted(R, key=lambda x:x.init_frame)
 
-        print("\n PRODUCED init frames ===================")
+        print("\nPRODUCED init frames ===================")
+        print("total: " + str(len(R)) + '\n')
         for k, roc in enumerate(R):
             print(f"roc.id: {roc.id}, init_frame: {roc.init_frame}, od={roc.p0.id, roc.p1.id}")
 

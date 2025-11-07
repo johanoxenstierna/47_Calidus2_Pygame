@@ -242,8 +242,8 @@ def translate(_R_gi):
             # _od = key[_od]  # does not work
 
         '''1 hour in game = 10 years IRL. 1 year = 365 frames, so 3650 frames'''
-        gi['init_frame'] = int(gi['t'] * 10 * standard_earth_period_frames / 1) # * 10 bcs 1h=10years  (t is in hours)
-        gi['fdist'] = int(gi['hPerR'] * 10 * standard_earth_period_frames / 1)  # OBS MORE DIV MAKES MORE OF THEM
+        gi['init_frame'] = int(gi['t'] * 10 * standard_earth_period_frames / 500) # * 10 bcs 1h=10years  (t is in hours)
+        gi['fdist'] = int(gi['hPerR'] * 10 * standard_earth_period_frames / 1000)  # OBS MORE DIV MAKES MORE OF THEM
 
     # for gi in _R_gi:  # after debug
     #     del gi['t']

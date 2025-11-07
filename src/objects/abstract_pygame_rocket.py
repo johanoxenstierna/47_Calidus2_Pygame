@@ -20,7 +20,7 @@ class AbstractPygameRocket:
         color = 255#int(_s.color[_s.age] * 255)
 
         # Radius: 1 or 2 depending on resolution
-        radius = 1
+        radius = 1 * P.SS_RENDER
 
         # Store drawing command into D
         D_scene.append((z, _s.type, (color, (int(x), int(y)), radius, alpha)))

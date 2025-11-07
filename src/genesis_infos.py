@@ -15,7 +15,7 @@ def _genesis():
     '''
 
     USE_T = 1
-    USE_SAVED_R = 0
+    USE_SAVED_R = 1
 
     # UNTOUCHED REAL VALUES solar_system_info = {
     #     '2_Mercury': {'AU': 0.387, 'period_days': 88},
@@ -47,15 +47,15 @@ def _genesis():
     T = {
         '2_Mercury':  {'r':  50, 'phi': 0 * 2 * np.pi, 'period_days':  150, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.05},
         '3_Venus':    {'r': 100, 'phi': 0 * 2 * np.pi, 'period_days':  200, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.15},
-        '4_Earth':    {'r': 200, 'phi': 0 * 2 * np.pi, 'period_days':  365, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.1},
-        '4_GSS':      {'r':  30, 'phi': 0 * 2 * np.pi, 'period_days':  100, 'y_squeeze': 0.30, 'tilt': 0.2 * np.pi, 'scale': 0.2},
+        '4_Earth':    {'r': 280, 'phi': 0 * 2 * np.pi, 'period_days':  365, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.1},
+        '4_GSS':      {'r':  30, 'phi': 0 * 2 * np.pi, 'period_days':  100, 'y_squeeze': 0.30, 'tilt': 0.2 * np.pi, 'scale': 0.4},
         '4_Moon':     {'r':  50, 'phi': 0 * 2 * np.pi, 'period_days':  200, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.1},
         '4_NEA':      {'r':  80, 'phi': 0 * 2 * np.pi, 'period_days':  300, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.2},
-        '5_Mars':     {'r': 300, 'phi': 0 * 2 * np.pi, 'period_days':  700, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.2},
-        '6_Jupiter':  {'r': 800, 'phi': 0 * 2 * np.pi, 'period_days': 4332, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.4},
-        '6_Europa':   {'r':  70, 'phi': 0 * 2 * np.pi, 'period_days':  300, 'y_squeeze': 0.20, 'tilt': 0.2 * np.pi, 'scale': 0.1},
-        '6_Ganymede': {'r':  60, 'phi': 0 * 2 * np.pi, 'period_days':  200, 'y_squeeze': 0.30, 'tilt': 0.2 * np.pi, 'scale': 0.05},
-        '6_Io':       {'r':  50, 'phi': 0 * 2 * np.pi, 'period_days':  100, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.05}
+        '5_Mars':     {'r': 400, 'phi': 0 * 2 * np.pi, 'period_days':  700, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.15},
+        '6_Jupiter':  {'r': 900, 'phi': 0 * 2 * np.pi, 'period_days': 4332, 'y_squeeze': 0.20, 'tilt': 0.1 * np.pi, 'scale': 0.4},
+        '6_Europa':   {'r':  60, 'phi': 0 * 2 * np.pi, 'period_days':  300, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.07},
+        '6_Ganymede': {'r':  50, 'phi': 0 * 2 * np.pi, 'period_days':  250, 'y_squeeze': 0.15, 'tilt': 0.15 * np.pi, 'scale': 0.05},
+        '6_Io':       {'r':  35, 'phi': 0 * 2 * np.pi, 'period_days':  200, 'y_squeeze': 0.20, 'tilt': 0.2 * np.pi, 'scale': 0.05}
     }
 
     # T = convert_to_project(T, solar_system_info)  # ONLY RELEVANT FOR REAL_SCALE
@@ -134,7 +134,7 @@ def _genesis():
             with open('./O0_info/R_gi_save.json', 'w') as f:
                 json.dump(gis['Rockets'], f, indent=4)
         else:
-            with open('./O0_info/R_gi_save_temp.json', 'r') as f:
+            with open('./O0_info/R_gi_save_2.json', 'r') as f:
                 gis['Rockets'] = json.load(f)
 
     for gi_id, gi in gis.items():

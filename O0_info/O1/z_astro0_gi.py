@@ -30,7 +30,7 @@ def astro0b_gi_():  # 20
     gi['y_squeeze'] = 0.18
     gi['tilt'] = 0.05 * 2 * np.pi  # 0.15     0.12 * 2 * np.pi  is 45 deg
     gi['zorder'] = 2000
-    gi['scale'] = 0.25
+    gi['scale'] = 0.3
     # gi['centroid_mult'] = 8
 
     return gi
