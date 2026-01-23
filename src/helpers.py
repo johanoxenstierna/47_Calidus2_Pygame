@@ -25,6 +25,7 @@ def phi_to_theta(phi):
     """Screen φ (0 at [0,-r], clockwise) → math θ (0 at [+r,0], CCW)."""
     return phi - np.pi/2
 
+
 def theta_to_phi(theta):
     """Math θ → screen φ."""
     return (theta + np.pi/2) % (2 * np.pi)

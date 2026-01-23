@@ -15,7 +15,7 @@ def _genesis():
     '''
 
     USE_T = 1
-    USE_SAVED_R = 1
+    USE_SAVED_R = 0
 
     # UNTOUCHED REAL VALUES solar_system_info = {
     #     '2_Mercury': {'AU': 0.387, 'period_days': 88},
@@ -134,7 +134,7 @@ def _genesis():
             with open('./O0_info/R_gi_save.json', 'w') as f:
                 json.dump(gis['Rockets'], f, indent=4)
         else:
-            with open('./O0_info/R_gi_save_2.json', 'r') as f:
+            with open('./O0_info/R_gi_save_temp.json', 'r') as f:
                 gis['Rockets'] = json.load(f)
 
     for gi_id, gi in gis.items():
@@ -209,13 +209,14 @@ def gen_incl_frames(R_gi: list) -> np.ndarray:
     sink[ramp_len + stay_len:] = ramp_up
 
     # OBS earth will use 730 frames for 1 rotation if SPEED_MULTIPLIER = 0.5
-    aspeed[0:730] = np.ones((730,))  # example: 1 full rotation at speed 1
-    aspeed[730:730 + ramp_len] = ramp_up
+    aspeed[0:365] = np.ones((365,))  # example: 1 full rotation at speed 1
+    aspeed[365:365 + ramp_len] = ramp_up
 
     for i in init_frames:
         i_start = i - ramp_len
         i_end = i + stay_len + ramp_len
         aspeed[i_start:i_end] = sink
+
 
     incl = []
     t = 0.0

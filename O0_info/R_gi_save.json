@@ -1,0 +1,14 @@
+[
+    {
+        "t": 20,
+        "od": [
+            "4_Earth",
+            "6_Io"
+        ],
+        "type": "first",
+        "hPerR": 1,
+        "c": "Sputnik - ISS (67)",
+        "init_frame": 73000,
+        "fdist": 3650
+    }
+]

@@ -137,8 +137,8 @@ def draw_HUD(i: int, screen: pygame.Surface, pos=(800, 900), color=(255, 255, 25
     days_total = max(0, min(days_total, max_days))
 
     years_passed, day_of_year = divmod(days_total, 365)
-    # year = 1750 + years_passed
-    year = 2250 + years_passed * 100
+    year = 1750 + years_passed
+    # year = 2250 + years_passed * 100
     # Safety in case of clamp at the very end:
     if year >= 7750:
         year = 7750

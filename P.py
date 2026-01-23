@@ -5,14 +5,14 @@ BASE_DIR = Path(__file__).resolve().parent
 MAP_DIMS = (1920, 1080)
 
 # FRAMES_START = 0
-FRAMES_STOP = 8000  #30000  OBS: Will be bugs if lower than, say,
+FRAMES_STOP = 20000  #30000  OBS: Will be bugs if lower than, say,
 # FRAMES_TOT_BODIES = FRAMES_STOP - 25
 # FRAMES_TOT = FRAMES_STOP - FRAMES_START
 
 FPS = 60  # 17:31
 SPEED_MULTIPLIER = 1  #latest: 0.4  # Makes objects move faster
-WRITE = 1  # OBS USE CORRECT VIDEO NUM
-ONE_ROCKET = 0
+WRITE = 0  # OBS USE CORRECT VIDEO NUM
+ONE_ROCKET = 1
 SKIP_FRAMES = 0
 
 SS = 2  # SSAA (super sampling anti aliasing) SET TO 2 FOR HIGHER QUALITY

@@ -138,10 +138,12 @@ while running:  # good so time can be
 
     draw_HUD(i, screen)
 
-    pygame.display.flip()  # single flip per frame  # <--
+
 
     if P.WRITE:
         vw.write_frame(screen)  # or vw.write_frame(final) if your writer accepts a Surface  # <--
+    else:
+        pygame.display.flip()  # single flip per frame  # <--
 
     clock.tick(P.FPS)
     i += i_step
