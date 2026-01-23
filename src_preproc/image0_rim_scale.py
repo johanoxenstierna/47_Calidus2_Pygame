@@ -188,11 +188,12 @@ if __name__ == '__main__':
         '6_Io': {'low': 0.95, 'high': 0.98, 'margin': 0, 'diameter': 100},
         '6_Ganymede': {'low': 0.95, 'high': 0.98, 'margin': 0, 'diameter': 100},
         '6_Europa': {'low': 0.95, 'high': 0.98, 'margin': 0, 'diameter': 100},
+        '9_Neptune': {'low': 0.95, 'high': 0.98, 'margin': 0, 'diameter': 100},
     }
 
     # OBS margin no effect if pic already reasonably bounded
 
-    NAME = '2_Mercury'
+    NAME = '9_Neptune'
     S = SETTINGS[NAME]
 
     pics = {}

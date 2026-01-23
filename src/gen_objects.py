@@ -7,6 +7,7 @@ from src.objects.o1 import O1C
 from src.objects.rocket1 import Rocket1
 from src.objects.rocket2 import Rocket2
 from src.objects.rocket3 import Rocket3
+from src.objects.rocket3000 import Rocket3000
 from src.load_save_pics import *
 from src.objects.rocket_helpers import jittered_range
 
@@ -196,12 +197,12 @@ class GenObjects:
             o1uranus.gen_DL()
             o0.O1['Uranus'] = o1uranus
 
-        if 'Neptune' in P.OBJ_TO_SHOW:
-            gi = self.gis['Neptune']
-            pics = self.pics['Neptune']
-            o1neptune = O1C(o1_id='Neptune', gi=gi, pics=pics, parent=o0, type='body')  # THE PIC IS ALWAYS TIED TO 1 INSTANCE?
+        if '9_Neptune' in P.OBJ_TO_SHOW:
+            gi = self.gis['9_Neptune']
+            pics = self.pics['9_Neptune']
+            o1neptune = O1C(o1_id='9_Neptune', gi=gi, pics=pics, parent=o0, type='body')  # THE PIC IS ALWAYS TIED TO 1 INSTANCE?
             o1neptune.gen_orbit()
-            o1neptune.gen_DL()
+            # o1neptune.gen_DL()
             o0.O1['Neptune'] = o1neptune
 
         return o0
@@ -257,7 +258,25 @@ class GenObjects:
             print(f"roc.id: {roc.id}, init_frame: {roc.init_frame}, od={roc.p0.id, roc.p1.id}")
 
         return R
-    
+
+    def gen_rockets3000(self):
+
+        R = []
+
+        gi_voyager = {'od': ((200, 200), (1600, 300)),
+                      'start_frame': 5,
+                      'num_frames': 300}
+        rocket_voyager = Rocket3000(gi_voyager)
+        R.append(rocket_voyager)
+
+        gi_3000 = {'od': ((200, 200), (1600, 300)),
+                   'start_frame': 5,
+                   'num_frames': 200}
+        rocket_3000 = Rocket3000(gi_3000)
+        R.append(rocket_3000)
+
+        return R
+
     def gen_init_frames(self, p0, p1, roc_gi):
         """
         Launch frames (init_frames) for a rocket going from body p0 to body p1.

@@ -8,8 +8,8 @@ import P
 def neptune_gi_():  # 20
 
     gi = {}
-    gi['r'] = 1300
-    gi['phi'] = 0.9 * 2 * np.pi
+    gi['r'] = 600
+    gi['phi'] = 0.0 * 2 * np.pi
     gi['speed_gi'] = 0.2  # 4
     gi['tilt'] = 0.07 * 2 * np.pi
     gi['scale'] = 0.4

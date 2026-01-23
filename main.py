@@ -26,7 +26,8 @@ o0 = g.gen_base_object()
 g.gen_planets_moons(o0)
 
 if 'Rockets' in P.OBJ_TO_SHOW:
-    R = g.gen_rockets(o0)
+    # R = g.gen_rockets(o0)
+    R = g.gen_rockets3000()  # ONLY ONE OR THE OTHER
 else:
     R = None
 
@@ -136,9 +137,7 @@ while running:  # good so time can be
     if P.WRITE == 0:
         draw_HUD_debug(i, screen)  # overlay stays crisp & always visible
 
-    draw_HUD(i, screen)
-
-
+    # draw_HUD(i, screen)
 
     if P.WRITE:
         vw.write_frame(screen)  # or vw.write_frame(final) if your writer accepts a Surface  # <--

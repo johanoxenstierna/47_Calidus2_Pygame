@@ -113,13 +113,13 @@ def load_pics_bodies(pics):
 
         # if P.GEN_DL_PIC_BANK == id or P.USE_DL == 0:
         if P.USE_DL == 0:  # we don't know whether there is anything in bodies/6_Jupiter
-            pics[id] = [pics[id]]
-        # elif P.USE_DL == 1 and P.GEN_DL_PIC_BANK == id:  # generate and show
+            pics[id] = [pics[id]]  # OBS OBS FOR GENERATION SEE BELOW
+        # elif P.USE_DL == 1 and P.GEN_DL_PIC_BANK == '9_Neptune':  # generate and show
         #     pics[id] = [pics[id]]
-        elif P.USE_DL == 1 and P.GEN_DL_PIC_BANK == 1:  # generate ALL and show
-            pics[id] = [pics[id]]  # IF FAIL, CHECK P.OBJ_TO_SHOW
+        elif P.USE_DL == 1 and P.GEN_DL_PIC_BANK == '9_Neptune':  # generate ALL and show
+            pics[id] = [pics[id]]  # IF FAIL, CHECK P.OBJ_TO_SHOW OR CHANGE 1 TO ID
         else:
-            pics[id] = load_pics_DL(f'./pictures/bodies/{id}/')  # only show
+            pics[id] = load_pics_DL(f'./pictures/bodies/{id}/')  # only show. HENCE, DONT USE THIS FOR BANK GEN
 
 def load_pics_DL(filepath):
 

@@ -131,7 +131,7 @@ class O1C(AbstractPygameObject):
 
         _s.radiuss *= _s.scale
 
-        if P.GEN_DL_PIC_BANK == 1:  #_s.id:
+        if P.GEN_DL_PIC_BANK == '9_Neptune':  #_s.id:
             image2_bank.build_and_save_bank(_s)
             if P.USE_DL:  # MAYBE TEMP...
                 _s.pics = load_pics_DL(f'./pictures/bodies/{_s.id}/')  #

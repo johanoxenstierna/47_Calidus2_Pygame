@@ -28,6 +28,7 @@ def _genesis():
     #     '6_Europa': {'AU': 0.00448, 'period_days': 4},  # around Jupiter
     #     '6_Ganymede': {'AU': 0.00715, 'period_days': 7},  # around Jupiter
     #     '6_Io': {'AU': 0.00282, 'period_days': 2},  # around Jupiter
+    #     '9_Neptune': {'AU': 30, 'period_days': 60195}
     # }
 
     # solar_system_info = {
@@ -54,8 +55,9 @@ def _genesis():
         '5_Mars':     {'r': 400, 'phi': 0 * 2 * np.pi, 'period_days':  700, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.15},
         '6_Jupiter':  {'r': 900, 'phi': 0 * 2 * np.pi, 'period_days': 4332, 'y_squeeze': 0.20, 'tilt': 0.1 * np.pi, 'scale': 0.4},
         '6_Europa':   {'r':  60, 'phi': 0 * 2 * np.pi, 'period_days':  300, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.07},
-        '6_Ganymede': {'r':  50, 'phi': 0 * 2 * np.pi, 'period_days':  250, 'y_squeeze': 0.15, 'tilt': 0.15 * np.pi, 'scale': 0.05},
-        '6_Io':       {'r':  35, 'phi': 0 * 2 * np.pi, 'period_days':  200, 'y_squeeze': 0.20, 'tilt': 0.2 * np.pi, 'scale': 0.05}
+        '6_Ganymede': {'r':  50, 'phi': 0 * 2 * np.pi, 'period_days':  250, 'y_squeeze': 0.15, 'tilt': 0.15 * np.pi,'scale': 0.05},
+        '6_Io':       {'r':  35, 'phi': 0 * 2 * np.pi, 'period_days':  200, 'y_squeeze': 0.20, 'tilt': 0.2 * np.pi, 'scale': 0.05},
+        '9_Neptune':  {'r':1200, 'phi': 0 * 2 * np.pi, 'period_days':  400, 'y_squeeze': 0.10, 'tilt': 0.2 * np.pi, 'scale': 0.1}
     }
 
     # T = convert_to_project(T, solar_system_info)  # ONLY RELEVANT FOR REAL_SCALE
@@ -124,9 +126,10 @@ def _genesis():
         if 'Uranus' in P.OBJ_TO_SHOW:
             gis['Uranus'] = h_uranus_gi.uranus_gi_()
 
-        if 'Neptune' in P.OBJ_TO_SHOW:
-            gis['Neptune'] = i_neptune_gi.neptune_gi_()
+        if '9_Neptune' in P.OBJ_TO_SHOW:
+            gis['9_Neptune'] = i_neptune_gi.neptune_gi_()
 
+    gis['Rockets'] = None  # to avoid incl_frames error.
     if 'Rockets' in P.OBJ_TO_SHOW:
         if USE_SAVED_R == 0:
             gis['Rockets'] = R_gi.R_gi_()
