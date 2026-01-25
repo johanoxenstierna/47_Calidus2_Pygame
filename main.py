@@ -82,14 +82,14 @@ while running:  # good so time can be
 
     # =======================================
     D_scene = []  # Drawables (objects shown in the animation): Rebuilt each iteration!
-    for o1_id, o1 in o0.O1.items():
-        if i == o1.frame_ss[0]:
-            o1.start_draw(D_scene)  # creates surfaces and rects
-        elif i > o1.frame_ss[0]:# and i < o1.frame_ss[1]:
-            o1.age += i_step  # bodies no longer use this! But _0 still does!
-            o1.update_draw(D_scene, i)
-        # elif i >= o1.frame_ss[1]:
-        #     pass
+    # for o1_id, o1 in o0.O1.items():
+    #     if i == o1.frame_ss[0]:
+    #         o1.start_draw(D_scene)  # creates surfaces and rects
+    #     elif i > o1.frame_ss[0]:# and i < o1.frame_ss[1]:
+    #         o1.age += i_step  # bodies no longer use this! But _0 still does!
+    #         o1.update_draw(D_scene, i)
+    #     # elif i >= o1.frame_ss[1]:
+    #     #     pass
 
     if 'Rockets' in P.OBJ_TO_SHOW:
         for rocket in R:
@@ -141,8 +141,8 @@ while running:  # good so time can be
 
     if P.WRITE:
         vw.write_frame(screen)  # or vw.write_frame(final) if your writer accepts a Surface  # <--
-    else:
-        pygame.display.flip()  # single flip per frame  # <--
+    # else:
+    pygame.display.flip()  # single flip per frame  # <--
 
     clock.tick(P.FPS)
     i += i_step

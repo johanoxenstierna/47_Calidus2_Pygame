@@ -265,13 +265,13 @@ class GenObjects:
 
         gi_voyager = {'od': ((200, 200), (1600, 300)),
                       'start_frame': 5,
-                      'num_frames': 300}
+                      'num_frames': 5000}
         rocket_voyager = Rocket3000(gi_voyager)
         R.append(rocket_voyager)
 
         gi_3000 = {'od': ((210, 200), (1600, 310)),
-                   'start_frame': 5,
-                   'num_frames': 200}
+                   'start_frame': 150,
+                   'num_frames': 15}
         rocket_3000 = Rocket3000(gi_3000)
         R.append(rocket_3000)
 
