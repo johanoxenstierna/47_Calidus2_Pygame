@@ -33,7 +33,7 @@ def gen_backgr(pics):
 
     base_surf = to_surface(base_arr)
     overlay_surf = to_surface(overlay_arr)
-    overlay_surf.set_alpha(int(0.1 * 255))
+    overlay_surf.set_alpha(int(0.2 * 255))
 
     base_surf.blit(overlay_surf, (0, 0))
     return base_surf

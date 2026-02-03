@@ -10,6 +10,7 @@ from src.objects.rocket3 import Rocket3
 from src.objects.rocket3000 import Rocket3000
 from src.load_save_pics import *
 from src.objects.rocket_helpers import jittered_range
+from src.objects.star import Star
 
 
 class GenObjects:
@@ -260,18 +261,24 @@ class GenObjects:
         return R
 
     def gen_rockets3000(self):
+        """
+        voyager: pixels_per_frame = 200 / 2000 = 0.1     600 / 6000  1200 / 6000 = 0.2
+        interst: 2000 / 100 = 20      2000 / 50 = 40
+
+        od's voyager: 4: 0-1200   5: 400-1600   6: 700-1900
+        """
 
         R = []
 
-        gi_voyager = {'od': ((200, 200), (1600, 300)),
+        gi_voyager = {'od': ((700, 400), (1900, 500)),
                       'start_frame': 5,
-                      'num_frames': 5000}
+                      'num_frames': 6000}
         rocket_voyager = Rocket3000(gi_voyager)
         R.append(rocket_voyager)
 
-        gi_3000 = {'od': ((210, 200), (1600, 310)),
-                   'start_frame': 150,
-                   'num_frames': 15}
+        gi_3000 = {'od': ((20, 405), (1900, 506)),
+                   'start_frame': 5200,
+                   'num_frames': 50}
         rocket_3000 = Rocket3000(gi_3000)
         R.append(rocket_3000)
 
@@ -355,47 +362,40 @@ class GenObjects:
         init_frames2 = init_frames1[:, 0].tolist()
         return sorted(init_frames2)
 
-    # def gen_init_framesOLD(self, p0, p1, roc_gi, destination_type):
-    #     """
-    #     For rockets based on distances (dp0p1) and distance gradients between two planets.
-    #     The sampling is beta-discrete from an argsort.
-    #
-    #     init_frames_cands ALLOWS all frames in planet motions. Cleaned up AFTER selection
-    #     The ddist are argsorted, then samples are taken from this argsort.
-    #     """
-    #
-    #     num_to_select = P.FRAMES_TOT // roc_gi['init_frame_step']
-    #
-    #     dist = -np.asarray([np.linalg.norm(p0.xy[i, :] - p1.xy[i, :]) for i in range(len(p0.xy))])
-    #     dist_grad = np.gradient(dist, axis=0)  # MUST BE BASED ON unsorted
-    #
-    #     dist = min_max_normalize_array(dist, y_range=[0, 1])
-    #     dist_grad = min_max_normalize_array(dist_grad, y_range=[0, 1])  # seems to work for neg vals
-    #
-    #     ddd = 0.3 * dist + 0.7 * dist_grad
-    #     ddd = min_max_normalize_array(ddd, y_range=[0, 1])
-    #
-    #     ddd_inds_sorted = np.argsort(ddd)[::-1]  #
-    #
-    #     '''OBS this pdf gives the probability that a frame will be sampled based on ddd
-    #     loc=30 means that the 30 frames when p0 and p1 are too close won't be sampled '''
-    #     pdf_dist = beta.pdf(x=np.arange(0, len(p0.xy)), loc=30, a=2, b=6, scale= len(p0.xy))  # 2 6
-    #     if destination_type == 'orbit':
-    #         pdf_dist = beta.pdf(x=np.arange(0, len(p0.xy)), loc=30, a=2, b=2, scale=1 * len(p0.xy))  # 2 6
-    #     pdf_dist /= np.sum(pdf_dist)  # only works for pos?
-    #     # dist_inds_sorted_subset = np.random.choice(dist_inds_sorted, size=len(p0.xy) // 2, replace=False, p=pdf_dist)
-    #     # dist_inds_sorted_subset = np.random.choice(dist_inds_sorted, size=num_to_select * 2, replace=False, p=pdf_dist)
-    #     init_frames = np.sort(np.random.choice(ddd_inds_sorted, size=num_to_select, replace=False, p=pdf_dist))
-    #     init_frames = init_frames[np.where(init_frames > 5)]
-    #     # init_frames = init_frames[np.where(init_frames + 2000 + roc_gi['frames_max'] < P.FRAMES_TOT_BODIES)]
-    #     init_frames = init_frames[np.where(init_frames + 2000 < P.FRAMES_TOT_BODIES)]
-    #
-    #     # min_distance_integers =
-    #     # filtered = [arr[0]]  # Always keep the first element
-    #     # for num in arr[1:]:
-    #     #     if num - filtered[-1] >= 100:
-    #     #         filtered.append(num)
-    #
-    #     init_frames = list(init_frames)
-    #     return init_frames
+    def gen_stars(self, o0):
+
+
+        for star_k in range(10):
+
+            star_info = {}
+
+            star_info['xy'] = (
+                np.random.randint(0, 1920 * P.SS_RENDER),
+                np.random.randint(0, 1080 * P.SS_RENDER)
+            )
+
+            star_info['radius'] = np.random.randint(2, 15)  # small stars
+            star_info['phase'] = np.random.uniform(0, 2 * np.pi)
+            star_info['twinkle_rate'] = np.random.uniform(0.1, 2.0)
+
+            base = np.random.randint(120, 256)
+            star_info['base_brightness'] = np.uint8(base)
+
+            _star = Star(star_info)
+            _star.twinkle_brightness()
+
+            o0.O1['star_' + str(star_k)] = _star
+
+        aadf = 5
+
+
+
+
+
+
+
+
+
+
+
 

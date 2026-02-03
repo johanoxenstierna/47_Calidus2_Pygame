@@ -72,7 +72,7 @@ class AbstractPygameObject(AbstractObject):
 
             D_scene.append((_s.zorder, _s.type, (_s.surf, _s.rect.topleft)))
 
-        elif _s.type == 'rocket':
+        elif _s.type == 'star':
             pass
 
     def update_draw(_s, D_scene, i):
@@ -136,7 +136,8 @@ class AbstractPygameObject(AbstractObject):
                 D_scene.append((z, _s.type, (surf, rect.topleft)))
 
         elif _s.type == '0_static':
-            D_scene.append((_s.zorder, _s.type, (_s.surf, _s.rect.topleft)))
+            pass
+            # D_scene.append((_s.zorder, _s.type, (_s.surf, _s.rect.topleft)))
         elif _s.type in ['0_']:
             xy = _s.parent.xy0_abs
             rot = _s.rotation[_s.age]
@@ -195,23 +196,16 @@ class AbstractPygameObject(AbstractObject):
 
             D_scene.append((z, _s.type, (surf, rect.topleft)))
 
-        # elif _s.type == 'rocket':  # MOVED
-        #
-        #     x, y = _s.xy[_s.age]
-        #     z = _s.zorders[_s.age]
-        #     alpha = int(_s.alphas[_s.age] * 255)
-        #
-        #     # Convert color from float to 0–255
-        #     # color = tuple(int(c * 255) for c in _s.color[_s.age])
-        #     color = int(_s.color[_s.age] * 255)
-        #
-        #     # Radius: 1 or 2 depending on resolution
-        #     radius = 1
-        #
-        #     # Store drawing command into D
-        #     D.append((z, _s.type, (color, (int(x), int(y)), radius, alpha)))
-
-
+        elif _s.type == 'star':
+            """(())"""
+            # D_scene.append((z, _s.type, (rgba, (int(x), int(y)), radius)))
+            D_scene.append((1000, _s.type, \
+                            (
+                                tuple(_s.rgb[i, :].tolist()) + (255,),
+                                (int(_s.info['xy'][0]), int(_s.info['xy'][1])),
+                                _s.info['radius'])
+                            )
+                           )
 
 
 

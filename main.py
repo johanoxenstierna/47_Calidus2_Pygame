@@ -8,7 +8,7 @@ import random
 
 import P
 
-random.seed(3)  # ONLY HERE
+random.seed(3)  # ONLY HERE.000000000000000000000
 np.random.seed(3)  # ONLY HERE
 import time
 
@@ -24,6 +24,7 @@ incl_frames = gen_incl_frames(g.gis['Rockets'])
 
 o0 = g.gen_base_object()
 g.gen_planets_moons(o0)
+g.gen_stars(o0)
 
 if 'Rockets' in P.OBJ_TO_SHOW:
     # R = g.gen_rockets(o0)
@@ -82,14 +83,14 @@ while running:  # good so time can be
 
     # =======================================
     D_scene = []  # Drawables (objects shown in the animation): Rebuilt each iteration!
-    # for o1_id, o1 in o0.O1.items():
-    #     if i == o1.frame_ss[0]:
-    #         o1.start_draw(D_scene)  # creates surfaces and rects
-    #     elif i > o1.frame_ss[0]:# and i < o1.frame_ss[1]:
-    #         o1.age += i_step  # bodies no longer use this! But _0 still does!
-    #         o1.update_draw(D_scene, i)
-    #     # elif i >= o1.frame_ss[1]:
-    #     #     pass
+    for o1_id, o1 in o0.O1.items():
+        if i == o1.frame_ss[0]:
+            o1.start_draw(D_scene)  # creates surfaces and rects
+        elif i > o1.frame_ss[0]:# and i < o1.frame_ss[1]:
+            o1.age += i_step  # bodies no longer use this! But _0 still does!
+            o1.update_draw(D_scene, i)
+        # elif i >= o1.frame_ss[1]:
+        #     pass
 
     if 'Rockets' in P.OBJ_TO_SHOW:
         for rocket in R:
@@ -126,6 +127,16 @@ while running:  # good so time can be
             world_surf.blit(surface, (pos[0] - r, pos[1] - r))
             # else:
             # pygame.draw.circle(screen, color, pos, r)
+        elif type == 'star':
+            rgba = tuple[0]
+            pos = tuple[1]
+            r = tuple[2]
+            # alpha = tuple[3]
+
+            # if alpha < 255:
+            surface = pygame.Surface((r * 2, r * 2), pygame.SRCALPHA)
+            pygame.draw.circle(surface, rgba, (r, r), r)
+            world_surf.blit(surface, (pos[0] - r, pos[1] - r))
         else:
             # screen.blit(tuple[0], tuple[1])
             world_surf.blit(tuple[0], tuple[1])

@@ -21,7 +21,7 @@ SS_RENDER = SS * (2 if LU_2X_ZOOM else 1)  #
 REAL_SCALE = 0
 
 OBJ_TO_SHOW = []
-OBJ_TO_SHOW.append('Rockets')  # Rockets2 switch in main
+# OBJ_TO_SHOW.append('Rockets')  # Rockets2 switch in main
 # OBJ_TO_SHOW.append('Sun')
 # OBJ_TO_SHOW.append('3_Venus')
 # OBJ_TO_SHOW.append('2_Mercury')
