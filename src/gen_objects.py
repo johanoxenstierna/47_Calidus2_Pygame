@@ -276,7 +276,7 @@ class GenObjects:
         rocket_voyager = Rocket3000(gi_voyager)
         R.append(rocket_voyager)
 
-        gi_3000 = {'od': ((20, 405), (1900, 506)),
+        gi_3000 = {'od': ((1, 405), (1919, 506)),
                    'start_frame': 5200,
                    'num_frames': 50}
         rocket_3000 = Rocket3000(gi_3000)
@@ -365,7 +365,7 @@ class GenObjects:
     def gen_stars(self, o0):
 
 
-        for star_k in range(10):
+        for star_k in range(700):
 
             star_info = {}
 
@@ -374,9 +374,9 @@ class GenObjects:
                 np.random.randint(0, 1080 * P.SS_RENDER)
             )
 
-            star_info['radius'] = np.random.randint(2, 15)  # small stars
+            star_info['radius'] = np.random.randint(1, 3)  # small stars
             star_info['phase'] = np.random.uniform(0, 2 * np.pi)
-            star_info['twinkle_rate'] = np.random.uniform(0.1, 2.0)
+            star_info['twinkle_rate'] = np.random.uniform(0.1, 0.5)
 
             base = np.random.randint(120, 256)
             star_info['base_brightness'] = np.uint8(base)

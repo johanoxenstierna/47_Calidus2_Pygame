@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent
 MAP_DIMS = (1920, 1080)
 
 # FRAMES_START = 0
-FRAMES_STOP = 600  #30000  OBS: Will be bugs if lower than, say,
+FRAMES_STOP = 6000  #30000  OBS: Will be bugs if lower than, say,
 # FRAMES_TOT_BODIES = FRAMES_STOP - 25
 # FRAMES_TOT = FRAMES_STOP - FRAMES_START
 
@@ -21,7 +21,7 @@ SS_RENDER = SS * (2 if LU_2X_ZOOM else 1)  #
 REAL_SCALE = 0
 
 OBJ_TO_SHOW = []
-# OBJ_TO_SHOW.append('Rockets')  # Rockets2 switch in main
+OBJ_TO_SHOW.append('Rockets')  # Rockets2 switch in main
 # OBJ_TO_SHOW.append('Sun')
 # OBJ_TO_SHOW.append('3_Venus')
 # OBJ_TO_SHOW.append('2_Mercury')

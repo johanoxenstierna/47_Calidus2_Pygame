@@ -30,6 +30,17 @@ class Star(AbstractPygameObject):
         self.rgb[:, 1] = b
         self.rgb[:, 2] = b
 
+        PALETTE = np.array([
+            # [255, 255, 255],  # white
+            [255, 240, 200],  # warm
+            [200, 220, 255],  # cool
+            [255, 220, 220],  # reddish
+            [220, 255, 240],  # greenish
+        ], dtype=np.uint8)
+
+        self.tint = PALETTE[np.random.randint(len(PALETTE))]  # (3,)
+        self.rgb[:] = (self.tint * (b[:, None] / 255)).astype(np.uint8)
+
 
 
 
