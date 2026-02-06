@@ -18,7 +18,7 @@ class AbstractPygameObject(AbstractObject):
         # _s.surfs_DL = []
         # _s.rects_DL = []
         _s.DL = []
-        _s.lifetime_dl = 200
+        _s.lifetime_dl = P.N_ORBIT_SAMPLES // 10
         if P.USE_DL == 0:
             _s.lifetime_dl = P.N_ORBIT_SAMPLES
 
@@ -136,8 +136,8 @@ class AbstractPygameObject(AbstractObject):
                 D_scene.append((z, _s.type, (surf, rect.topleft)))
 
         elif _s.type == '0_static':
-            pass
-            # D_scene.append((_s.zorder, _s.type, (_s.surf, _s.rect.topleft)))
+            # pass
+            D_scene.append((_s.zorder, _s.type, (_s.surf, _s.rect.topleft)))
         elif _s.type in ['0_']:
             xy = _s.parent.xy0_abs
             rot = _s.rotation[_s.age]

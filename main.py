@@ -27,8 +27,8 @@ g.gen_planets_moons(o0)
 g.gen_stars(o0)
 
 if 'Rockets' in P.OBJ_TO_SHOW:
-    # R = g.gen_rockets(o0)
-    R = g.gen_rockets3000()  # ONLY ONE OR THE OTHER
+    R = g.gen_rockets(o0)
+    # R = g.gen_rockets3000()  # ONLY ONE OR THE OTHER
 else:
     R = None
 

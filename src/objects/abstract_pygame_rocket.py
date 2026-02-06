@@ -1,4 +1,5 @@
 import P
+import numpy as np
 
 
 class AbstractPygameRocket:
@@ -19,11 +20,15 @@ class AbstractPygameRocket:
         # color = tuple(int(c * 255) for c in _s.color[_s.age])
         color = 255#int(_s.color[_s.age] * 255)
 
-        # Radius: 1 or 2 depending on resolution
-        if _s.gi['num_frames'] == 20:
-            radius = 4 * P.SS_RENDER
-        else:
-            radius = 2 * P.SS_RENDER
+        # # TEMP FOR rocket3000
+        # # Radius: 1 or 2 depending on resolution
+        # if _s.gi['num_frames'] == 20:
+        #     radius = 4 * P.SS_RENDER
+        # else:
+        #     radius = 2 * P.SS_RENDER
+
+        # radius = 1 * P.SS_RENDER
+        radius = np.random.randint(1, 4) #
 
         # Store drawing command into D
         D_scene.append((z, _s.type, (color, (int(x), int(y)), radius, alpha)))

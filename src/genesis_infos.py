@@ -15,7 +15,7 @@ def _genesis():
     '''
 
     USE_T = 1
-    USE_SAVED_R = 0
+    USE_SAVED_R = 1
 
     # UNTOUCHED REAL VALUES solar_system_info = {
     #     '2_Mercury': {'AU': 0.387, 'period_days': 88},
@@ -57,7 +57,7 @@ def _genesis():
         '6_Europa':   {'r':  60, 'phi': 0 * 2 * np.pi, 'period_days':  300, 'y_squeeze': 0.15, 'tilt': 0.1 * np.pi, 'scale': 0.07},
         '6_Ganymede': {'r':  50, 'phi': 0 * 2 * np.pi, 'period_days':  250, 'y_squeeze': 0.15, 'tilt': 0.15 * np.pi,'scale': 0.05},
         '6_Io':       {'r':  35, 'phi': 0 * 2 * np.pi, 'period_days':  200, 'y_squeeze': 0.20, 'tilt': 0.2 * np.pi, 'scale': 0.05},
-        '9_Neptune':  {'r':1200, 'phi': 0 * 2 * np.pi, 'period_days':  400, 'y_squeeze': 0.10, 'tilt': 0.2 * np.pi, 'scale': 0.1}
+        '9_Neptune':  {'r': 1300, 'phi': 0 * 2 * np.pi, 'period_days': 8000, 'y_squeeze': 0.40, 'tilt': 0.07 * np.pi, 'scale': 0.12}
     }
 
     # T = convert_to_project(T, solar_system_info)  # ONLY RELEVANT FOR REAL_SCALE
@@ -137,7 +137,7 @@ def _genesis():
             with open('./O0_info/R_gi_save.json', 'w') as f:
                 json.dump(gis['Rockets'], f, indent=4)
         else:
-            with open('./O0_info/R_gi_save_temp.json', 'r') as f:
+            with open('./O0_info/R_gi_save_2.json', 'r') as f:
                 gis['Rockets'] = json.load(f)
 
     for gi_id, gi in gis.items():
