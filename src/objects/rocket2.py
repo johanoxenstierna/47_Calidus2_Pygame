@@ -21,6 +21,7 @@ class Rocket2(AbstractPygameRocket):
         self.DISPLAY = 1  # Just frame_ss xy BOTH ARE OVERWRITTEN
 
         self.id = 'Not done yet (maybe not needed)'
+        self.init_frame = 0
         self.gi = gi
         self.zorder = 2000
         self.type = 'rocket'

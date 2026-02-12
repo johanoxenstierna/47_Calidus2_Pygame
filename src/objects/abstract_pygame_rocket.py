@@ -28,7 +28,8 @@ class AbstractPygameRocket:
         #     radius = 2 * P.SS_RENDER
 
         # radius = 1 * P.SS_RENDER
-        radius = np.random.randint(1, 4) #
+        # radius = np.random.randint(1, 4) #
+        radius = 10
 
         # Store drawing command into D
         D_scene.append((z, _s.type, (color, (int(x), int(y)), radius, alpha)))
