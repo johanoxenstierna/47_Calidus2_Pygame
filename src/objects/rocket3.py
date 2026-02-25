@@ -121,7 +121,7 @@ class Rocket3(AbstractPygameRocket):
         # ================================
 
         # # LANDING =======================
-        if self.destination_type == 'inter' and self.p1.parent.id != '0':
+        if self.destination_type == 'inter' and self.p1.parent.id != '0':  # moon
             xy2_rotated_cutoff = int(len(xy2_rotated) * 0.8)
             xy2_rotated = xy2_rotated[:xy2_rotated_cutoff, :]
             # v0 = slope_at_idx(xy2_rotated, len(xy2_rotated) - 1, side='before')
