@@ -49,7 +49,7 @@ class Rocket3(AbstractPygameRocket):
 
         """
         takeoff_frames = int(120 / P.SPEED_MULTIPLIER)  # WE NEED HARDCODED FOR COASTING/TRANSFER ROTATION, BUT RAND COULD BE ADDED HERE
-        landing_frames = int(120 / P.SPEED_MULTIPLIER)  #
+        landing_frames = int(120 / P.SPEED_MULTIPLIER)  # TODO: Should be based on velocity diff between
 
         # XY_TARGET -> PHI FOR ROTATION ===============================
         if self.destination_type == 'inter':
@@ -122,17 +122,21 @@ class Rocket3(AbstractPygameRocket):
 
         # # LANDING =======================
         if self.destination_type == 'inter' and self.p1.parent.id != '0':  # moon
+            '''This is ugly as hell. But not that easy to fix. 
+            Just add more frames to start with! Both landing_frames and B2. It could just be tuning. 
+            '''
+
             xy2_rotated_cutoff = int(len(xy2_rotated) * 0.8)
             xy2_rotated = xy2_rotated[:xy2_rotated_cutoff, :]
             # v0 = slope_at_idx(xy2_rotated, len(xy2_rotated) - 1, side='before')
             i_range_landing = range(self.init_frame + len(xy2_rotated),
                                     self.init_frame + len(xy2_rotated) + landing_frames)
-            p1xy2 = np.copy(self.p1.xy2[self.p1.get_i_orbit(i_range_landing)])  # [0, 0] is Jupiter
+            p1moonxy2 = np.copy(self.p1.xy2[self.p1.get_i_orbit(i_range_landing)])  # [0, 0] is Jupiter
             p1tpxy2 = np.copy(self.p1.parent.xy2[self.p1.parent.get_i_orbit(i_range_landing)])  # [0, 0] is Sun
-            p1xy2 += p1tpxy2  # [0, 0] is Sun
+            p1moonxy2 += p1tpxy2  # [0, 0] is Sun
             B2 = 120
-            blend2 = crossfade_B_frames(xy2_rotated, p1xy2, B2)
-            xy2_rotated = np.vstack((xy2_rotated[:len(xy2_rotated) - B2 // 2], blend2, p1xy2[B2 // 2:]))
+            blend2 = crossfade_B_frames(xy2_rotated, p1moonxy2, B2)
+            xy2_rotated = np.vstack((xy2_rotated[:len(xy2_rotated) - B2 // 2], blend2, p1moonxy2[B2 // 2:]))
 
         ## ================================
 

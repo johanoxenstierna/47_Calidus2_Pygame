@@ -87,6 +87,7 @@ def gen_mask_xy0(diameter: int, xy0, softness: float = 0.08,
 
 def gen_mask(d: int, y_squeeze: float, softness: float = 2.0) -> np.ndarray:
     """
+    Decides how big crescent is.
     Standardized for relative sun position [0, -1], i.e., it's behind the sun.
     y_squeeze in [0, 1]. It's the multiplication factor of the y component in a perfectly circular orbit.
     y_squeeze = 1.0 → straight line y=r (-1 out top half y<r)  (we're looking straight from above solar system)

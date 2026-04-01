@@ -139,7 +139,7 @@ while running:  # good so time can be
             world_surf.blit(surface, (pos[0] - r, pos[1] - r))
         else:
             # screen.blit(tuple[0], tuple[1])
-            world_surf.blit(tuple[0], tuple[1])
+            world_surf.blit(tuple[0], tuple[1])  # tuple[0] is probably surface
 
     final = get_final_frame(world_surf)
     screen.blit(backgr_screen, (0, 0))
